@@ -3,7 +3,7 @@ import './vendor.ts';
 import { NgModule, Injector } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Ng2Webstorage, LocalStorageService, SessionStorageService  } from 'ngx-webstorage';
+import { Ng2Webstorage, LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
@@ -11,13 +11,21 @@ import { AuthExpiredInterceptor } from './blocks/interceptor/auth-expired.interc
 import { ErrorHandlerInterceptor } from './blocks/interceptor/errorhandler.interceptor';
 import { NotificationInterceptor } from './blocks/interceptor/notification.interceptor';
 import { FireSharedModule, UserRouteAccessService } from './shared';
-import { FireAppRoutingModule} from './app-routing.module';
+import { FireAppRoutingModule } from './app-routing.module';
 import { FireHomeModule } from './home/home.module';
 import { FireAdminModule } from './admin/admin.module';
 import { FireAccountModule } from './account/account.module';
 import { FireEntityModule } from './entities/entity.module';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
+
+// firebase
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from './environments/environment';
+
 import {
     JhiMainComponent,
     NavbarComponent,
@@ -31,8 +39,13 @@ import {
 @NgModule({
     imports: [
         BrowserModule,
+        // firebase
+        AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
+        AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+        AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+        AngularFireStorageModule, // imports firebase/storage only needed for storage features
         FireAppRoutingModule,
-        Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
+        Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         FireSharedModule,
         FireHomeModule,
         FireAdminModule,
@@ -86,6 +99,6 @@ import {
             ]
         }
     ],
-    bootstrap: [ JhiMainComponent ]
+    bootstrap: [JhiMainComponent]
 })
-export class FireAppModule {}
+export class FireAppModule { }
