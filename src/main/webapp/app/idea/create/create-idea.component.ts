@@ -1,31 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleVisionService } from '../core';
+import { GoogleVisionService } from '../../core';
 
 import { FirebaseDatabase } from '@firebase/database-types';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 // models
-import { LabelModel } from '../core/models/label.model';
-import { IdeaModel } from '../core/models/idea.model';
+import { LabelModel } from '../../core/models/label.model';
+import { IdeaModel } from '../../core/models/idea.model';
+import { AccountService } from '../../shared/auth/account.service';
 
 @Component({
   selector: 'jhi-idea',
-  templateUrl: './idea.component.html',
+  templateUrl: './create-idea.component.html',
   styleUrls: [
-    'idea.scss'
+    'create-idea.scss'
   ]
 })
-export class IdeaComponent implements OnInit {
+export class CreateIdeaComponent implements OnInit {
 
   private base64textString: String = '';
   private labels: LabelModel[];
 
   title = 'lol';
   synopsis = '';
+  userId: string;
+  url = '';
 
-  constructor(private googleVisionSvc: GoogleVisionService, private db: AngularFireDatabase) { }
+  constructor(private googleVisionSvc: GoogleVisionService, private db: AngularFireDatabase, private account: AccountService) { }
 
   ngOnInit() {
+    this.account.get().subscribe((user) => {
+      this.userId = user.body.id;
+    });
   }
 
   // event to get file selected
@@ -47,6 +53,18 @@ export class IdeaComponent implements OnInit {
     this.getLabels(btoa(binaryString));
   }
 
+  readUrl(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = (ev: any) => {
+        this.url = ev.target.result;
+      };
+
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
   // get labels from a picture
   getLabels(binary) {
     this.googleVisionSvc.getLabels(binary).subscribe((result) => {
@@ -60,10 +78,8 @@ export class IdeaComponent implements OnInit {
     console.log('this', this);
     console.log('this.idea : ', this.title);
 
-    const itemRef = this.db.object('idea');
-    itemRef.set({
-      'title': this.title
-    });
+    const itemsRef = this.db.list('ideas');
+    itemsRef.push({ title: this.title, synopsis: this.synopsis, userId: this.userId });
   }
 
 }

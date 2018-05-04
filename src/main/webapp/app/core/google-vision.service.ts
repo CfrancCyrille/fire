@@ -27,7 +27,7 @@ export class GoogleVisionService extends HttpService {
                 }
             ]
         };
-        return this.http.post('https://vision.googleapis.com/v1/images:annotate?key=' + environment.googleCloudVisionAPIKey, body)
+        return this.http.post('https://vision.googleapis.com/v1p2beta1/images:annotate?key=' + environment.googleCloudVisionAPIKey, body)
             .map((res: Response) => this.extractData(res))
             .catch(this.handleError);
     }
