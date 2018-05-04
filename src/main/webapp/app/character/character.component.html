@@ -1,3 +1,82 @@
-<p>
-  character works!
-</p>
+<h2>
+    <span jhiTranslate="character.home-title">Idea</span>
+    <button class="btn btn-primary float-right jh-create-entity" (click)="open(content)">
+        <span class="fa fa-plus"></span>
+        <span jhiTranslate="character.createLabel">Créer un nouveau personnage</span>
+    </button>
+</h2>
+<jhi-alert></jhi-alert>
+
+<div class="table-responsive" *ngIf="characters">
+
+    <table class="table table-striped">
+
+        <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
+            <th jhiSortBy="firstname">
+                <span jhiTranslate="character.firstname">Firstname</span>
+                <span class="fa fa-sort"></span>
+            </th>
+            <th jhiSortBy="lastname">
+                <span jhiTranslate="character.lastname">Lastname</span>
+                <span class="fa fa-sort"></span>
+            </th>
+            <th jhiSortBy="pseudo">
+                <span jhiTranslate="character.pseudo">Pseudo</span>
+                <span class="fa fa-sort"></span>
+            </th>
+            <th jhiSortBy="bio">
+                <span jhiTranslate="character.bio">Bio</span>
+                <span class="fa fa-sort"></span>
+            </th>
+        </tr>
+        </thead>
+
+        <tbody *ngIf="characters">
+        <tr *ngFor="let character of characters; trackBy: trackIdentity">
+            <td>{{character.firstname}}</td>
+            <td>{{character.lastname}}</td>
+            <td>{{character.pseudo}}</td>
+            <td>{{character.bio}}</td>
+            <td class="text-right">
+                <div class="btn-group flex-btn-group-container">
+                    <button type="submit" replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm" (click)="removeCharacter(character.key)">
+                        <span class="fa fa-remove"></span>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label>Prénom</label>
+                <input type="text" class="form-control" [(ngModel)]="character.firstname" [ngModelOptions]="{standalone: true}">
+                <label>Nom</label>
+                <input type="text" class="form-control" [(ngModel)]="character.lastname" [ngModelOptions]="{standalone: true}">
+                <label>Pseudo</label>
+                <input type="text" class="form-control" [(ngModel)]="character.pseudo" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+                <label>Bio</label>
+                <textarea class="form-control" rows="3" [(ngModel)]="character.bio" [ngModelOptions]="{standalone: true}"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveCharacter()" (click)="d('Cross click')">Enregistrer</button>
+    </div>
+</ng-template>
