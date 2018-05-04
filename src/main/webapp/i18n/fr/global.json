@@ -139,5 +139,13 @@
         "title": "Titre",
         "synopsis": "Synopsis",
         "input": "Insérer une image pour obtenir ses labels"
+    },
+    "character": {
+        "firstname": "Prénom",
+        "lastname": "Nom",
+        "pseudo": "Pseudo",
+        "bio": "Bio",
+        "home-title": "Personnages",
+        "createLabel": "Créer un nouveau personnage"
     }
 }

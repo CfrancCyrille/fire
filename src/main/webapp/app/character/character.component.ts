@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import {CharacterModel} from "../core/models/character.model";
 import {AccountService} from "../shared/auth/account.service";
-import { Observable } from 'rxjs/Observable';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-character',
@@ -12,13 +12,14 @@ import { Observable } from 'rxjs/Observable';
 export class CharacterComponent implements OnInit {
 
   character: CharacterModel;
-  success: boolean;
-  characters: Observable<any[]>;
+  characters: any[];
+  closeResult: string;
+  itemsRef: AngularFireList<any>;
 
-  constructor(private db: AngularFireDatabase, private account: AccountService) { }
+  constructor(private db: AngularFireDatabase, private account: AccountService, private modalService: NgbModal) { }
 
   ngOnInit() {
-      this.characters = this.db.list('characters').valueChanges();
+      this.itemsRef = this.db.list('characters');
 
       this.character = new CharacterModel();
 
@@ -26,13 +27,36 @@ export class CharacterComponent implements OnInit {
           this.character.idUser = user.body.id;
       });
 
-      this.success = false;
-  }
+      this.itemsRef.snapshotChanges().map(changes => {
+          return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+      }).subscribe((characters) => {
+              this.characters = characters;
+          });
+      }
 
     saveCharacter() {
         this.db.list('characters').push(this.character);
-        this.success = true;
-        console.log(this.success)
     }
 
+    removeCharacter(key: any) {
+        this.db.list('characters').remove(key);
+    }
+
+    open(content) {
+        this.modalService.open(content).result.then((result) => {
+            this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+    }
+
+    private getDismissReason(reason: any): string {
+        if (reason === ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        } else {
+            return  `with: ${reason}`;
+        }
+    }
 }
