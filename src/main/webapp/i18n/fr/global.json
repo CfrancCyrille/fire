@@ -5,6 +5,7 @@
         "menu": {
             "home": "Accueil",
             "idea": "Idées",
+            "character": "Personnages",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entités",

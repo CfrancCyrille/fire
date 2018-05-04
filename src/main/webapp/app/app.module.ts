@@ -15,6 +15,7 @@ import { FireAppRoutingModule } from './app-routing.module';
 import { FireHomeModule } from './home/home.module';
 import { FireAdminModule } from './admin/admin.module';
 import { FireIdeaModule } from './idea/idea.module';
+import { FireCharacterModule } from './character/character.module';
 import { FireAccountModule } from './account/account.module';
 import { FireEntityModule } from './entities/entity.module';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
@@ -41,6 +42,7 @@ import { ScenariosComponent } from './scenarios/scenarios.component';
 import { CoreModule } from './core/core.module';
 
 
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -57,6 +59,7 @@ import { CoreModule } from './core/core.module';
         FireAccountModule,
         FireEntityModule,
         FireIdeaModule,
+        FireCharacterModule,
         CoreModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
