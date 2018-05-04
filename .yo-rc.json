@@ -34,6 +34,7 @@
     "languages": [
       "fr"
     ],
-    "herokuDeployType": "git"
+    "herokuDeployType": "git",
+    "herokuAppName": "radiant-wave-13531"
   }
 }
