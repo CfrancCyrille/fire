@@ -8,11 +8,11 @@
     <form>
       <div class="form-group">
         <label for="formGroupExampleInput">Titre</label>
-        <input type="text" class="form-control" id="formGroupExampleInput" [(value)]="title">
+        <input type="text" class="form-control" [(ngModel)]="title" [ngModelOptions]="{standalone: true}">
       </div>
       <div class="form-group">
         <label for="exampleFormControlTextarea1">Synopsis</label>
-        <textarea class="form-control" rows="3" [(value)]="synopsis"></textarea>
+        <textarea class="form-control" rows="3" [(ngModel)]="synoposis" [ngModelOptions]="{standalone: true}"></textarea>
       </div>
     </form>
 

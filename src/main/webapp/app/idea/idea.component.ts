@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleVisionService } from '../core';
-import { LabelModel } from '../core/models/label.model';
-import { FirebaseDatabase } from '@firebase/database-types';
 
+import { FirebaseDatabase } from '@firebase/database-types';
 import { AngularFireDatabase } from 'angularfire2/database';
+
+// models
+import { LabelModel } from '../core/models/label.model';
+import { IdeaModel } from '../core/models/idea.model';
 
 @Component({
   selector: 'jhi-idea',
@@ -17,7 +20,7 @@ export class IdeaComponent implements OnInit {
   private base64textString: String = '';
   private labels: LabelModel[];
 
-  title = '';
+  title = 'lol';
   synopsis = '';
 
   constructor(private googleVisionSvc: GoogleVisionService, private db: AngularFireDatabase) { }
@@ -27,19 +30,19 @@ export class IdeaComponent implements OnInit {
 
   // event to get file selected
   handleFileSelect(evt) {
-    var files = evt.target.files;
-    var file = files[0];
+    const files = evt.target.files;
+    const file = files[0];
 
     if (files && file) {
-      var reader = new FileReader();
+      const reader = new FileReader();
       reader.onload = this._handleReaderLoaded.bind(this);
       reader.readAsBinaryString(file);
     }
   }
 
-  // convert and send picture to api 
+  // convert and send picture to api
   _handleReaderLoaded(readerEvt) {
-    var binaryString = readerEvt.target.result;
+    const binaryString = readerEvt.target.result;
     this.base64textString = btoa(binaryString);
     this.getLabels(btoa(binaryString));
   }
@@ -48,23 +51,19 @@ export class IdeaComponent implements OnInit {
   getLabels(binary) {
     this.googleVisionSvc.getLabels(binary).subscribe((result) => {
       this.labels = result['responses'][0]['labelAnnotations'];
-    }, err => {
+    }, (err) => {
       console.warn('err', err);
     });
   }
 
   saveIdea() {
-    console.log('save !');
-    const idea = {
-      'title': this.title,
-      'synopsis': this.synopsis
-    };
+    console.log('this', this);
+    console.log('this.idea : ', this.title);
 
     const itemRef = this.db.object('idea');
-    itemRef.set(idea);
-
-
-    console.log('title', this.title);
+    itemRef.set({
+      'title': this.title
+    });
   }
 
 }

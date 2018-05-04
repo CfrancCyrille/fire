@@ -40,7 +40,6 @@ import { environment } from './environments/environment';
 import { ScenariosComponent } from './scenarios/scenarios.component';
 import { CoreModule } from './core/core.module';
 
-
 @NgModule({
     imports: [
         BrowserModule,
