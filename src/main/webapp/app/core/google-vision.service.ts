@@ -14,19 +14,19 @@ export class GoogleVisionService extends HttpService {
 
     getLabels(base64Image): Observable<any> {
         const body = {
-            "requests": [
+            'requests': [
                 {
-                    "image": {
-                        "content": base64Image
+                    'image': {
+                        'content': base64Image
                     },
-                    "features": [
+                    'features': [
                         {
-                            "type": "LABEL_DETECTION"
+                            'type': 'LABEL_DETECTION'
                         }
                     ]
                 }
             ]
-        }
+        };
         return this.http.post('https://vision.googleapis.com/v1/images:annotate?key=' + environment.googleCloudVisionAPIKey, body)
             .map((res: Response) => this.extractData(res))
             .catch(this.handleError);
