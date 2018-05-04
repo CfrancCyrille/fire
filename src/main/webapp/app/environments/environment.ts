@@ -6,6 +6,7 @@ export const environment = {
     databaseURL: 'https://fire-36150.firebaseio.com',
     projectId: 'fire-36150',
     storageBucket: '',
-    messagingSenderId: '748524077357'
-  }
+    messagingSenderId: '748524077357',
+  },
+  googleCloudVisionAPIKey: 'AIzaSyCtcDBqCy-Sm9m4EkROPxFwIVVpCJmtHFg'
 };

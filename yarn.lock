@@ -124,6 +124,12 @@
   dependencies:
     tslib "^1.7.1"
 
+"@angular/http@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@angular/http/-/http-6.0.0.tgz#f409e35cd2f4990b43a37beab915ffdcd9c7c992"
+  dependencies:
+    tslib "^1.9.0"
+
 "@angular/platform-browser-dynamic@5.2.0":
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-5.2.0.tgz#6d3e074363606b559c3319d2433d1c08ccaefbad"
@@ -8537,7 +8543,7 @@ tsickle@^0.26.0:
     source-map "^0.5.6"
     source-map-support "^0.4.2"
 
-tslib@1.9.0, tslib@^1.7.1, tslib@^1.8.1:
+tslib@1.9.0, tslib@^1.7.1, tslib@^1.8.1, tslib@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
 
