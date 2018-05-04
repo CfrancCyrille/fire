@@ -33,6 +33,7 @@
     "nativeLanguage": "fr",
     "languages": [
       "fr"
-    ]
+    ],
+    "herokuDeployType": "git"
   }
 }
