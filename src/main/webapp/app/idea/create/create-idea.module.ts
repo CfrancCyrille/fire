@@ -1,17 +1,17 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { FireSharedModule } from '../shared';
+import { FireSharedModule } from '../../shared';
 
-import { IDEA_ROUTE, IdeaComponent } from './';
+import { CREATE_IDEA_ROUTE, CreateIdeaComponent } from './';
 
 @NgModule({
     imports: [
         FireSharedModule,
-        RouterModule.forChild([IDEA_ROUTE])
+        RouterModule.forChild([CREATE_IDEA_ROUTE])
     ],
     declarations: [
-        IdeaComponent,
+        CreateIdeaComponent,
     ],
     entryComponents: [
     ],
@@ -19,4 +19,4 @@ import { IDEA_ROUTE, IdeaComponent } from './';
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class FireIdeaModule { }
+export class FireCreateIdeaModule { }

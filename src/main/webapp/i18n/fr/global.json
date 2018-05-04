@@ -133,6 +133,10 @@
     },
     "footer": "Ceci est votre pied de page",
     "idea": {
+        "home-title": "Idées",
+        "createLabel": "Créer une nouvelle idée",
+        "title": "Titre",
+        "synopsis": "Synopsis",
         "input": "Insérer une image pour obtenir ses labels"
     }
 }
