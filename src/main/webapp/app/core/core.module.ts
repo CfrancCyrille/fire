@@ -4,10 +4,12 @@ import { HttpModule } from '@angular/http';
 
 // Services
 import { GoogleVisionService, HttpService } from '.';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 @NgModule({
     imports: [
-        HttpModule
+        HttpModule,
+        AngularFireDatabaseModule
     ],
     declarations: [
     ],

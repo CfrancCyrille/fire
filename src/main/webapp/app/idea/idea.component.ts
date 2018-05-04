@@ -3,6 +3,8 @@ import { GoogleVisionService } from '../core';
 import { LabelModel } from '../core/models/label.model';
 import { FirebaseDatabase } from '@firebase/database-types';
 
+import { AngularFireDatabase } from 'angularfire2/database';
+
 @Component({
   selector: 'jhi-idea',
   templateUrl: './idea.component.html',
@@ -15,7 +17,10 @@ export class IdeaComponent implements OnInit {
   private base64textString: String = '';
   private labels: LabelModel[];
 
-  constructor(private googleVisionSvc: GoogleVisionService) { }
+  title = '';
+  synopsis = '';
+
+  constructor(private googleVisionSvc: GoogleVisionService, private db: AngularFireDatabase) { }
 
   ngOnInit() {
   }
@@ -46,6 +51,20 @@ export class IdeaComponent implements OnInit {
     }, err => {
       console.warn('err', err);
     });
+  }
+
+  saveIdea() {
+    console.log('save !');
+    const idea = {
+      'title': this.title,
+      'synopsis': this.synopsis
+    };
+
+    const itemRef = this.db.object('idea');
+    itemRef.set(idea);
+
+
+    console.log('title', this.title);
   }
 
 }

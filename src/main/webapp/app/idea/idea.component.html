@@ -4,6 +4,20 @@
   </div>
   <div class="col-md-9">
     <!-- <p class="lead" jhiTranslate="home.subtitle">This is your homepage</p> -->
+
+    <form>
+      <div class="form-group">
+        <label for="formGroupExampleInput">Titre</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" [(value)]="title">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Synopsis</label>
+        <textarea class="form-control" rows="3" [(value)]="synopsis"></textarea>
+      </div>
+    </form>
+
+    <button type="button" class="btn btn-success" (click)="saveIdea()">Enregistrer</button>
+
     <form>
       <div class="form-group">
         <label for="exampleFormControlFile1" jhiTranslate="idea.input">Example file input</label>
