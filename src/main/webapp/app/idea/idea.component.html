@@ -1,3 +1,14 @@
-<p>
-  idea works!
-</p>
+<div class="row">
+  <div class="col-md-3">
+    <span class="hipster img-fluid rounded"></span>
+  </div>
+  <div class="col-md-9">
+    <!-- <p class="lead" jhiTranslate="home.subtitle">This is your homepage</p> -->
+    <form>
+      <div class="form-group">
+        <label for="exampleFormControlFile1" jhiTranslate="idea.input">Example file input</label>
+        <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="handleFileSelect($event)">
+      </div>
+    </form>
+  </div>
+</div>
