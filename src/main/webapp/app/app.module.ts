@@ -36,6 +36,7 @@ import {
 } from './layouts';
 
 import { environment } from './environments/environment';
+import { ScenariosComponent } from './scenarios/scenarios.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { environment } from './environments/environment';
         ErrorComponent,
         PageRibbonComponent,
         ActiveMenuDirective,
-        FooterComponent
+        FooterComponent,
+        ScenariosComponent
     ],
     providers: [
         ProfileService,
