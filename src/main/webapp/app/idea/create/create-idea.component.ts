@@ -21,7 +21,9 @@ export class CreateIdeaComponent implements OnInit {
   private base64textString: String = '';
   private labels: LabelModel[];
 
-  title = 'lol';
+  labelsToStore = [];
+
+  title = 'Nouvelle idée';
   synopsis = '';
   userId: string;
   url = '';
@@ -69,6 +71,11 @@ export class CreateIdeaComponent implements OnInit {
   getLabels(binary) {
     this.googleVisionSvc.getLabels(binary).subscribe((result) => {
       this.labels = result['responses'][0]['labelAnnotations'];
+
+      this.labels.forEach((label) => {
+        this.labelsToStore.push(label.description);
+      });
+
     }, (err) => {
       console.warn('err', err);
     });
@@ -77,9 +84,10 @@ export class CreateIdeaComponent implements OnInit {
   saveIdea() {
     console.log('this', this);
     console.log('this.idea : ', this.title);
+    console.log('this.labelsToStore', this.labelsToStore);
 
     const itemsRef = this.db.list('ideas');
-    itemsRef.push({ title: this.title, synopsis: this.synopsis, userId: this.userId });
+    itemsRef.push({ title: this.title, synopsis: this.synopsis, userId: this.userId, labels: this.labelsToStore });
   }
 
 }

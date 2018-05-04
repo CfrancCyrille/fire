@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GoogleVisionService } from '../../core';
 
 import { FirebaseDatabase } from '@firebase/database-types';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 // models
 import { LabelModel } from '../../core/models/label.model';
@@ -20,14 +20,22 @@ import { Observable } from 'rxjs/Observable';
 export class ListIdeaComponent implements OnInit {
 
   ideas: any;
+  itemsRef: AngularFireList<any>;
 
   constructor(private db: AngularFireDatabase) {
-    this.db.list('ideas').valueChanges().subscribe((ideas) => {
+    this.itemsRef = db.list('ideas');
+    // snapshotChanges().map() to store the key
+    this.ideas = this.itemsRef.snapshotChanges().map((changes) => {
+      return changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }));
+    }).subscribe((ideas) => {
       this.ideas = ideas;
-      console.log('ideas', this.ideas);
     });
   }
 
   ngOnInit() { }
+
+  deleteIdea(id) {
+    this.itemsRef.remove(id);
+  }
 
 }

@@ -1,7 +1,7 @@
 <div>
   <h2>
     <span jhiTranslate="idea.home-title">Idea</span>
-    <button class="btn btn-primary float-right jh-create-entity">
+    <button class="btn btn-primary float-right jh-create-entity" routerLink="/create-idea">
       <span class="fa fa-plus"></span>
       <span jhiTranslate="idea.createLabel">Créer une nouvelle idée</span>
     </button>
@@ -22,6 +22,10 @@
             <span jhiTranslate="idea.synopsis">Synopsis</span>
             <span class="fa fa-sort"></span>
           </th>
+          <th jhiSortBy="labels">
+            <span jhiTranslate="idea.labels">Labels</span>
+            <span class="fa fa-sort"></span>
+          </th>
           <th></th>
         </tr>
       </thead>
@@ -30,9 +34,14 @@
         <tr *ngFor="let idea of ideas; trackBy: trackIdentity">
           <td>{{idea.title}}</td>
           <td>{{idea.synopsis}}</td>
+          <td>
+            <div *ngFor="let label of idea.labels">
+              - {{ label }}
+            </div>
+          </td>
           <td class="text-right">
             <div class="btn-group flex-btn-group-container">
-              <button type="submit" replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm">
+              <button (click)="deleteIdea(idea.key)" class="btn btn-danger btn-sm">
                 <span class="fa fa-remove"></span>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
               </button>
