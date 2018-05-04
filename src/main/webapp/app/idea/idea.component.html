@@ -9,6 +9,10 @@
         <label for="exampleFormControlFile1" jhiTranslate="idea.input">Example file input</label>
         <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="handleFileSelect($event)">
       </div>
+
+      <div *ngIf="labels">
+        <span class="badge badge-primary labels" *ngFor="let l of labels">{{ l.description}}</span>
+      </div>
     </form>
   </div>
 </div>

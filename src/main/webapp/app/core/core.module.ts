@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
 // Services
-import { GoogleVisionService } from '.';
+import { GoogleVisionService, HttpService } from '.';
 
 @NgModule({
     imports: [
@@ -15,6 +15,7 @@ import { GoogleVisionService } from '.';
     ],
     providers: [
         GoogleVisionService,
+        HttpService
     ]
 })
 export class CoreModule { }
