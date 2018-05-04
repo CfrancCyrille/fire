@@ -16,6 +16,7 @@ import { FireHomeModule } from './home/home.module';
 import { FireAdminModule } from './admin/admin.module';
 import { FireCreateIdeaModule } from './idea/create/create-idea.module';
 import { FireListIdeaModule } from './idea/list/list-idea.module';
+import { FireCharacterModule } from './character/character.module';
 import { FireAccountModule } from './account/account.module';
 import { FireEntityModule } from './entities/entity.module';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
@@ -58,6 +59,7 @@ import { CoreModule } from './core/core.module';
         FireEntityModule,
         FireCreateIdeaModule,
         FireListIdeaModule,
+        FireCharacterModule,
         CoreModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
